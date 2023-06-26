@@ -14,7 +14,7 @@
 </body>
 </html>
 <script>
-    const socket = io("http://localhost:8080",{transports:["websocket"] })
+    const socket = io("https://chatapp-phoo.onrender.com/",{transports:["websocket"] })
     var name = prompt("enter your name")
     var room_no = prompt("enter room number")
     socket.emit("details",{room_no})
