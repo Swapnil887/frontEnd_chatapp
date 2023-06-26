@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input type="text" placeholder="message" id="message">
+    <button id="send">send</button>
+    <script src="https://cdn.socket.io/4.6.0/socket.io.min.js" integrity="sha384-c79GN5VsunZvi+Q/WObgk2in0CbZsHnjEqvFxC5DxHn9lTfNce2WW6h2pH6u/kF+" crossorigin="anonymous"></script>
+
+</body>
+</html>
+<script>
+    const socket = io("http://localhost:8080",{transports:["websocket"] })
+    var name = prompt("enter your name")
+    var room_no = prompt("enter room number")
+    socket.emit("details",{room_no})
+
+   var  button = document.querySelector("#send")
+    button.addEventListener("click",()=>{
+        var x = document.querySelector("#message").value;
+        socket.emit("message",{x,name})
+    })
+
+    socket.on("recive",(res)=>{
+        var x=document.createElement("h4")
+        var y=document.createElement("p")
+        x.innerText = res.x;
+        y.innerText = `send by ${res.name}`
+       console.log(res)
+       
+        document.querySelector("body").append(x,y)
+
+        
+        console.log(res)
+    })
+
+    
+</script>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div>
+        <h1>LOGIN</h1>
+        <input type="text" placeholder="email" id="email">
+        <input type="text" placeholder="password" id="password">
+        <button id="done">click</button>
+    </div>
+</body>
+</html>
+<script>
+    var done = document.querySelector("#done")
+
+    done.addEventListener("click",async ()=>{
+        
+        var email = document.querySelector("#email").value
+        var password = document.querySelector("#password").value
+        
+        var payload = {name,email,password}
+        console.log(payload)
+
+try {
+  let url = "http://localhost:8080/user/Login";
+
+    let responce = await fetch(url, {
+      method: "POST",
+      body: JSON.stringify(payload),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    let res = await responce.json();
+    console.log('res',res)
+
+    
+        window.location.href = "./signup.html"
+    
+   
+    
+} catch (error) {
+  console.log(error)
+}
+    })
+    
+
+    
+</script>
